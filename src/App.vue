@@ -5,18 +5,26 @@
   <span>Адресная система отдела картографии УИТС г. Сургута</span>
 </div > 
     <div class="navigation">
-    <b-tabs content-class="mt-3">
-      <b-tab title="Справочник городов" active>I'm the first fading tab</b-tab>
+      <b-card no-body>
+    <b-tabs pills card vertical content-class="mt-3">
+      <b-tab title="Справочник городов" active>
+        <base-list></base-list>
+      </b-tab>
       <b-tab title="Справочник поселков">I'm the second tab content</b-tab>
       <b-tab title="Справочник улиц">Disabled tab!</b-tab>
   </b-tabs>
+  </b-card>
    </div>
   </div>
 </template>
 
 <script>
+
+import baseList from './components/baseList.vue'
+
 export default {
   name: 'app',
+  components: { baseList },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -39,5 +47,8 @@ export default {
 span {
     font-size: 35px;
     margin-left: 15px;
+}
+  .tab-pane:focus{ 
+    outline: none;
 }
 </style>

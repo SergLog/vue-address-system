@@ -1,0 +1,112 @@
+<template>
+
+
+ <div class="container mt-4 col-md-6">     
+
+    <table class="table table-bordered table-sm">
+      <thead class="thead-light text-center">
+        <tr>
+          <!-- <th width="1">#</th> -->
+          <th width="10%">id</th>
+          <th width="60%">Наименование</th>
+          <th width="30%">Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, index) in items" :key="index">
+          <!-- <td>{{ index + 1 }}</td> -->
+          
+          <td>
+            <span v-if="editIndex !== index"> {{ item.id }} </span>
+            <span v-if="editIndex === index">
+              <b-form-input v-model="item.id"></b-form-input>
+            </span>           
+          </td>
+          <td>
+            <span v-if="editIndex !== index"> {{ item.name }} </span>
+            <span v-if="editIndex === index">
+              <b-form-input v-model="item.name"></b-form-input>
+            </span>    
+          </td>
+          <td>
+            <span v-if="editIndex !== index">
+              <b-button variant="outline-secondary" size="sm" @click="edit(item, index)">Редактировать</b-button>
+              <b-button variant="outline-danger" size="sm" @click="remove(item, index)">Удалить</b-button>
+            </span>
+            <span v-else>
+              <b-button variant="outline-dark" size="sm" @click="cancel(item)">Отмена</b-button>
+              <b-button variant="outline-success" size="sm" @click="save(item)">Сохранить</b-button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+        <!-- <div class="col-3 offset-9 text-right my-3"> -->
+      <b-button variant="outline-success" size="sm" v-show="editIndex !== 0 && !editIndex" @click="add">Добавить новую запись</b-button>
+    <!-- </div> -->
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'app',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App',
+      editIndex: null,
+      isAdd: false,
+      items: [
+          {id: 1, name: 'Сургут'},
+          {id: 2, name: 'Москва'},
+          {id: 3, name: 'Ростов'},
+          {id: 4, name: 'Пенза'},
+          {id: 5, name: 'Ставрополь'},
+          {id: 6, name: 'Нью-Йорк'},
+      ]
+    }
+  },
+  methods: {
+      
+    add() {
+      this.originalData = null;
+      this.items.push({ id: '', name: '' });
+      this.editIndex = this.items.length - 1;
+      this.isAdd = true;
+    },
+
+    edit(item, index) {
+      this.editIndex = index;
+    },
+
+    cancel(item) {
+      this.editIndex = null ;
+      if (this.isAdd) {
+      this.items.splice(this.items.indexOf(item), 1);
+      this.isAdd = false;
+      }
+    },
+
+    remove(item, index) {
+      this.items.splice(index, 1);
+    },
+
+    save(item) {
+      this.editIndex = null;
+    },
+  },
+}
+</script>
+
+<style scoped>
+span {
+    font-size: 15px;
+  }
+.table .thead-light th {
+  color: white;
+  background-color: #007bff;
+  border-color: #dee2e6;
+}
+
+
+</style>
