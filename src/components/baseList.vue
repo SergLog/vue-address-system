@@ -1,8 +1,20 @@
 <template>
+ <div class="container mt-4">
 
+      <b-row>
+      <b-col md="7" class="my-1 mb-4">
+        <b-form-group label-cols-sm="3" label="Поиск" class="mb-0">
+          <b-input-group>
+            <b-form-input v-model="searchName" placeholder="Введите текст для поиска"/>
+            <b-input-group-append>
+              <b-button :disabled="!searchName" @click="searchName = ''">Очистить</b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form-group>
+      </b-col>     
+    </b-row>     
 
- <div class="container mt-4 col-md-6">     
-
+    <b-row>
     <table class="table table-bordered table-sm">
       <thead class="thead-light text-center">
         <tr>
@@ -13,7 +25,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in items" :key="index">
+        <!-- <tr v-for="(item, index) in items" :key="index"> -->
+        <tr v-for="(item, index) in items" :key="index" v-show="filter(item.name)">
           <!-- <td>{{ index + 1 }}</td> -->
           
           <td>
@@ -41,6 +54,7 @@
         </tr>
       </tbody>
     </table>
+    </b-row>
         <!-- <div class="col-3 offset-9 text-right my-3"> -->
       <b-button variant="outline-success" size="sm" v-show="editIndex !== 0 && !editIndex" @click="add">Добавить новую запись</b-button>
     <!-- </div> -->
@@ -56,6 +70,7 @@ export default {
       msg: 'Welcome to Your Vue.js App',
       editIndex: null,
       isAdd: false,
+      searchName: "",
       items: [
           {id: 1, name: 'Сургут'},
           {id: 2, name: 'Москва'},
@@ -94,6 +109,12 @@ export default {
     save(item) {
       this.editIndex = null;
     },
+    filter(itemname) {
+      if (itemname.toLowerCase().includes(this.searchName.toLowerCase())) {
+        return true;
+      }
+      return false;
+    }
   },
 }
 </script>
