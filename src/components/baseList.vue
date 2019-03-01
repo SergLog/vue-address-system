@@ -19,9 +19,10 @@
       <thead class="thead-light text-center">
         <tr>
           <!-- <th width="1">#</th> -->
-          <th width="10%">id</th>
-          <th width="60%">Наименование</th>
-          <th width="30%">Действия</th>
+          <!-- <th width="10%">id</th>
+          <th width="60%">Наименование</th> -->
+          <th v-for="(item, index) in columns" :key="index" v-bind:width="item.width"> {{ item.name }} </th>
+          <!-- <th width="30%">Действия</th> -->
         </tr>
       </thead>
       <tbody>
@@ -70,16 +71,12 @@ export default {
       msg: 'Welcome to Your Vue.js App',
       editIndex: null,
       isAdd: false,
-      searchName: "",
-      items: [
-          {id: 1, name: 'Сургут'},
-          {id: 2, name: 'Москва'},
-          {id: 3, name: 'Ростов'},
-          {id: 4, name: 'Пенза'},
-          {id: 5, name: 'Ставрополь'},
-          {id: 6, name: 'Нью-Йорк'},
-      ]
+      searchName: ""
     }
+  },
+  props: {
+    columns: [],
+    items: []
   },
   methods: {
       

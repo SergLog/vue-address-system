@@ -8,7 +8,7 @@
       <b-card no-body>
     <b-tabs pills card vertical content-class="mt-3">
       <b-tab title="Справочник городов" active>
-        <base-list></base-list>
+        <base-list v-bind:items="citiesArray" v-bind:columns="columns"></base-list>
       </b-tab>
       <b-tab title="Справочник поселков">I'm the second tab content</b-tab>
       <b-tab title="Справочник улиц">Disabled tab!</b-tab>
@@ -27,7 +27,21 @@ export default {
   components: { baseList },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      citiesArray: [
+          {id: 1, name: 'Сургут'},
+          {id: 2, name: 'Москва'},
+          {id: 3, name: 'Ростов'},
+          {id: 4, name: 'Пенза'},
+          {id: 5, name: 'Ставрополь'},
+          {id: 6, name: 'Нью-Йорк'},
+      ],
+      columns: [
+        {name: 'id', width: '10%'},
+        {name: 'Наименование', width: '70%'},
+        {name: 'Действия', width: '20%'},
+
+        ],
     }
   }
 }
