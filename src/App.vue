@@ -21,6 +21,7 @@
 <script>
 
 import baseList from './components/baseList.vue'
+import axios from 'axios'
 
 export default {
   name: 'app',
@@ -28,14 +29,15 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      citiesArray: [
-          {id: 1, name: 'Сургут'},
-          {id: 2, name: 'Москва'},
-          {id: 3, name: 'Ростов'},
-          {id: 4, name: 'Пенза'},
-          {id: 5, name: 'Ставрополь'},
-          {id: 6, name: 'Нью-Йорк'},
-      ],
+      // citiesArray: [
+      //     {id: 1, name: 'Сургут'},
+      //     {id: 2, name: 'Москва'},
+      //     {id: 3, name: 'Ростов'},
+      //     {id: 4, name: 'Пенза'},
+      //     {id: 5, name: 'Ставрополь'},
+      //     {id: 6, name: 'Нью-Йорк'},
+      //],
+      citiesArray: null,
       columns: [
         {name: 'id', width: '10%'},
         {name: 'Наименование', width: '70%'},
@@ -43,8 +45,20 @@ export default {
 
         ],
     }
+  }, 
+  created() {
+    axios.get(`http://localhost:25535/api/streets`)
+    .then(response => {
+      
+      this.citiesArray = response.data;
+      
+    })
+    .catch(e => {
+      //this.errors.push(e)
+      console.log(e);
+    })
+  }    
   }
-}
 </script>
 
 <style>
