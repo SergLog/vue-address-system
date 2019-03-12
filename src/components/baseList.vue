@@ -29,7 +29,7 @@
         <!-- <tr v-for="(item, index) in items" :key="index"> -->
         <tr v-for="(item, index) in items" :key="index" v-show="filterName(item.адрес, item.isNew)">
           <!-- <td>{{ item }}</td> -->
-          <td>
+          <td class="align-middle">
             <span v-if="editIndex !== index"> {{ item.код }} </span>
             <span v-if="editIndex === index">
               <b-form-input class="bg-light" v-model="item.код"></b-form-input>
@@ -41,7 +41,7 @@
               <b-form-input class="bg-light" v-model="item.адрес"></b-form-input>
             </span>    
           </td>
-          <td>
+          <td class="align-middle">
             <span v-if="editIndex !== index">
               <b-button variant="outline-secondary" size="sm" @click="edit(item, index)">Редактировать</b-button>
               <b-button variant="outline-danger" size="sm" @click="remove(item, index)">Удалить</b-button>

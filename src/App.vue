@@ -29,14 +29,6 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      // citiesArray: [
-      //     {id: 1, name: 'Сургут'},
-      //     {id: 2, name: 'Москва'},
-      //     {id: 3, name: 'Ростов'},
-      //     {id: 4, name: 'Пенза'},
-      //     {id: 5, name: 'Ставрополь'},
-      //     {id: 6, name: 'Нью-Йорк'},
-      //],
       citiesArray: null,
       columns: [
         {name: 'id', width: '10%'},
@@ -47,17 +39,15 @@ export default {
     }
   }, 
   created() {
-    axios.get(`http://localhost:25535/api/streets`)
-    .then(response => {
-      
-      this.citiesArray = response.data;
-      
+    axios.get(`http://192.168.112.22:8282/api/streets`)
+    .then(response => {      
+      this.citiesArray = response.data;      
     })
     .catch(e => {
       //this.errors.push(e)
       console.log(e);
     })
-  }    
+   }    
   }
 </script>
 
